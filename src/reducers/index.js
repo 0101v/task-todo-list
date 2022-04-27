@@ -1,10 +1,10 @@
 import { 
-  ADD_TODO_LIST, DEL_TODO_LIST, CHANGE_TODO_LIST
-} from "../actions";
+  ADD_TODO_LIST_ACTION, DEL_TODO_LIST_ACTION, CHANGE_TODO_LIST_ACTION
+} from "../constants";
 
 const INITIAL_STATE = [
   { 
-    text: 'add todo list',
+    text: 'first list',
     id: '1'
   }
 ]
@@ -12,11 +12,11 @@ const INITIAL_STATE = [
 const reducer = (state = INITIAL_STATE, {type, payload}) => {
   switch (type) {
     
-    case ADD_TODO_LIST:
+    case ADD_TODO_LIST_ACTION:
       return [...state, payload]
-    case DEL_TODO_LIST:
+    case DEL_TODO_LIST_ACTION:
       return [...payload]
-    case CHANGE_TODO_LIST:
+    case CHANGE_TODO_LIST_ACTION:
       return [...payload]
     default:
       return state

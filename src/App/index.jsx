@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { Container, TopPanel } from './components'
+import { Container, TopPanel } from './style'
 
-import AppHeader from '../components/app-header'
-import InputPanel from '../components/input-panel'
-import TodoList from '../components/todo-list'
+import AppHeader from '../components/header'
+import InputPanel from '../components/inputPanel'
+import TodoList from '../components/todoList'
 
 const App = () => {
   

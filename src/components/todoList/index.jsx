@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { TodoListComponent, Item } from './components'
-import TodoListItem from '../todo-list-item';
+import { TodoListComponent, Item } from './style'
+import TodoListItem from '../todoListItem'
 
-import { delTodoList, changeElemTodoList } from '../../actions';
+import { delTodoList, changeElemTodoList } from '../../actions'
 
-import { Button, TextField,  DialogActions, DialogContent, Dialog } from '@mui/material';
+import { Button, TextField,  DialogActions, DialogContent, Dialog } from '@mui/material'
+
+import { useFormik } from 'formik'
 
 const TodoList = () => {
   const store = useSelector(store => store)
@@ -16,6 +18,22 @@ const TodoList = () => {
   const [open, setOpen] = useState(false)
   const [listId, setListId] = useState('')
 
+  const formik = useFormik({
+    initialValues: {
+      input: '',
+    },
+    onSubmit: () => {
+      const todoList = store.map(el => {
+        if (el.id === listId) {
+          el.text = inputText;
+        }
+        return el
+      })
+      
+      dispatch(changeElemTodoList(todoList))
+      setOpen(false)
+    },
+  });
 
   const onDeleted = (id) => () => {
     const list = store.filter(el => el.id !== id)
@@ -28,20 +46,13 @@ const TodoList = () => {
     setListId(id)
     setOpen(true)
   }
-  const handleClose = (even) => {
-    const todoList = store.map(el => {
-      if (el.id === listId) el.text = inputText;
-      return el
-    })
-    
-    dispatch(changeElemTodoList(todoList))
-    setOpen(false)
-  }
-  const onChangeText = (even) => {
-    setInputText(even.target.value)
+
+  
+
+  const onChangeText = (event) => {
+    setInputText(event.target.value)
   }
   
-    
   return (
     <>
       <TodoListComponent className='list-group'>
@@ -60,7 +71,7 @@ const TodoList = () => {
         }
       </TodoListComponent>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={formik.handleSubmit}>
         <DialogContent>
           <TextField
             variant="outlined"
@@ -75,11 +86,10 @@ const TodoList = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Ok</Button>
+          <Button onClick={formik.handleSubmit}>Ok</Button>
         </DialogActions>
       </Dialog>
     </>
-    
   )
 };
 

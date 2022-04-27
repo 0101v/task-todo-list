@@ -8,3 +8,5 @@ export const Input = styled.input`
   width: 425px;
   margin: 10px 0;
 `
+export const Form = styled.form``
+export const Button = styled.button``

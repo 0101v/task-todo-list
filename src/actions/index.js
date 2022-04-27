@@ -1,17 +1,16 @@
-
-export const ADD_TODO_LIST = 'ADD_TODO_LIST'
-export const DEL_TODO_LIST = 'DEL_TODO_LIST'
-export const CHANGE_TODO_LIST = 'CHANGE_TODO_LIST'
+import { 
+  ADD_TODO_LIST_ACTION, DEL_TODO_LIST_ACTION, CHANGE_TODO_LIST_ACTION
+} from "../constants";
 
 export const addTodoList = payload => ({
-  type: ADD_TODO_LIST,
+  type: ADD_TODO_LIST_ACTION,
   payload,
 })
 export const delTodoList = payload => ({
-  type: DEL_TODO_LIST,
+  type: DEL_TODO_LIST_ACTION,
   payload,
 })
 export const changeElemTodoList = payload => ({
-  type: CHANGE_TODO_LIST,
+  type: CHANGE_TODO_LIST_ACTION,
   payload,
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Header, Text } from './components'
+import { Header, Text } from './style'
 
 const AppHeader = () => {
   return (

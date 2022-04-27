@@ -1,14 +1,12 @@
 import React from 'react'
 
-import { Todolistitemlabel, Button } from './components'
+import { Todolistitemlabel, Button, Container, SvgElem } from './style'
 
 
 const TodoListItem = ({ text, onDeleted, onChange }) => {
 
-  
-
   return (
-    <span>
+    <Container>
       <Todolistitemlabel >
         {text}
       </Todolistitemlabel>
@@ -16,15 +14,15 @@ const TodoListItem = ({ text, onDeleted, onChange }) => {
         className='btn btn-outline-danger btn-sm float-right'
         onClick={onDeleted}
         >
-        <i className='fa fa-trash-o' />
+        <SvgElem className='fa fa-trash-o' />
       </Button>
       <Button type='button'
         className='btn btn-outline-success btn-sm float-right'
         onClick={onChange}
         >
-        <i className='fa fa-pencil-square-o'/>  
+        <SvgElem className='fa fa-pencil-square-o'/>  
       </Button>
-    </span>
+    </Container>
   )
 };
 

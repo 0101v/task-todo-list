@@ -3,18 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux'
 import { addTodoList } from '../../actions';
 
-import { Input } from './components'
+import { Input, Form, Button } from './style'
+
+import { useFormik } from 'formik'
 
 const InputPanel = () => {
   const dispatch = useDispatch();
   const [state, setState ] = useState('')
 
-  const onChange = event => {
-    setState(event.target.value)
-  }
-
-  const onSubmit = event => {
-    event.preventDefault()
+  const formik = useFormik({
+    initialValues: {
+      input: 'create todo',
+    },
+    onSubmit: () => {
     
     if (!state.trim().length) {
       setState('')
@@ -23,20 +24,30 @@ const InputPanel = () => {
 
     dispatch(addTodoList({text: state, id: uuidv4()}))
     setState('')
+    },
+  });
+
+  const onChange = event => {
+    setState(event.target.value)
   }
 
+  
+
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={formik.handleSubmit}>
       <Input
-        placeholder="input"
+        id='input'
+        name='input'
+        type='text'
+        placeholder={formik.values.input}
         className="form-control"
         onChange={onChange}
         value={state}
       />
-      <button className='btn btn-primary btn-block' >
+      <Button className='btn btn-primary btn-block' >
         Add Element
-      </button>
-    </form>    
+      </Button>
+    </Form>
   );
 };
 
